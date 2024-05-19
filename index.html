@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TravelWithUs</title>
+    <title>TravelWithUs - Home</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -19,7 +19,14 @@
         nav {
             background-color: #444;
             padding: 10px 0;
-            text-align: center;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        nav .left-links,
+        nav .right-link {
+            display: flex;
+            align-items: center;
         }
         nav a {
             color: #fff;
@@ -76,6 +83,25 @@
         .feature p {
             color: #777;
         }
+        .team {
+            padding: 50px 0;
+            background-color: #f9f9f9;
+            text-align: center;
+        }
+        .team h2 {
+            margin-bottom: 20px;
+        }
+        .team-member {
+            display: inline-block;
+            margin: 20px;
+        }
+        .team-member img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            display: block;
+            margin: 0 auto 10px;
+        }
         footer {
             background-color: #333;
             color: #fff;
@@ -92,10 +118,14 @@
         <h1>Welcome to TravelWithUs</h1>
     </header>
     <nav>
-        <a href="#">Home</a>
-        <a href="#">About</a>
-        <a href="#">Services</a>
-        <a href="#">Contact</a>
+        <div class="left-links">
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="services.html">Services</a>
+        </div>
+        <div class="right-link">
+            <a href="signup.html" class="signup">Sign Up</a>
+        </div>
     </nav>
     <div class="hero">
         <h1>Explore the World with Us</h1>
@@ -109,11 +139,22 @@
         </div>
         <div class="feature">
             <h2>Discover Hotels</h2>
-            <p>Explore a wide range of accommodations options for your stay.</p>
+            <p>Explore a wide range of accommodation options for your stay.</p>
         </div>
         <div class="feature">
             <h2>Plan Activities</h2>
             <p>Discover exciting activities and experiences at your destination.</p>
+        </div>
+    </div>
+    <div class="team">
+        <h2>Our Team</h2>
+        <div class="team-member">
+            <img src="tayyab.jpg" alt="Team Member 1">
+            <p>Tayyab Siddique<br>Reg# 4424-FBAS/BSCS4/F-21(A)</p>
+        </div>
+        <div class="team-member">
+            <img src="talha.jpg" alt="Team Member 2">
+            <p>Talha Sheikh<br>Reg# 4428-FBAS/BSCS4/F-21(A)</p>
         </div>
     </div>
     <footer>
