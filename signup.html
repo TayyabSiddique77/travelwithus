@@ -124,12 +124,19 @@
     <script>
         document.getElementById('signupForm').addEventListener('submit', function(event) {
             event.preventDefault();
-            
-            // Simulate sending OTP
+
+            // Get user input
+            const email = document.getElementById('email').value;
+
+            // Generate random OTP
             const otp = Math.floor(1000 + Math.random() * 9000);
+
+            // Display OTP to the user
+            alert('OTP sent to your email: ' + otp);
+
+            // Store OTP in sessionStorage
             sessionStorage.setItem('otp', otp);
-            alert('OTP sent to your email (simulated): ' + otp);
-            
+
             // Hide signup form and show OTP form
             document.getElementById('signup-form').style.display = 'none';
             document.getElementById('otp-form').style.display = 'block';
@@ -137,11 +144,15 @@
 
         document.getElementById('otpForm').addEventListener('submit', function(event) {
             event.preventDefault();
-            
+
+            // Get user input OTP
             const enteredOtp = document.getElementById('otp').value;
+
+            // Retrieve stored OTP from sessionStorage
             const storedOtp = sessionStorage.getItem('otp');
-            
-            if (enteredOtp == storedOtp) {
+
+            // Verify OTP
+            if (enteredOtp === storedOtp) {
                 alert('Sign up successful!');
                 // Reset forms and states for demonstration purposes
                 document.getElementById('signupForm').reset();
