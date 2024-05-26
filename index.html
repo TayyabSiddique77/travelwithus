@@ -22,6 +22,16 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            position: relative; /* Normal position initially */
+            width: 100%;
+            transition: all 0.3s ease; /* Smooth transition */
+        }
+        nav.sticky {
+            position: fixed;
+            top: 0;
+            z-index: 1000; /* Ensure it is above other content */
+            background-color: rgba(68, 68, 68, 0.9); /* Slight transparency for smoother transition */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional shadow for effect */
         }
         nav .left-links,
         nav .right-link {
@@ -108,8 +118,12 @@
             padding: 20px 0;
             text-align: center;
             position: fixed;
-            bottom: 0;
+            bottom: -100px; /* Hidden by default */
             width: 100%;
+            transition: bottom 0.3s;
+        }
+        footer.visible {
+            bottom: 0; /* Show footer */
         }
     </style>
 </head>
@@ -117,7 +131,7 @@
     <header>
         <h1>Welcome to TravelWithUs</h1>
     </header>
-    <nav>
+    <nav id="navbar">
         <div class="left-links">
             <a href="index.html">Home</a>
             <a href="about.html">About</a>
@@ -157,8 +171,28 @@
             <p>Talha Sheikh<br>Reg# 4428-FBAS/BSCS4/F-21(A)</p>
         </div>
     </div>
-    <footer>
+    <footer id="footer">
         &copy; 2024 TravelWithUs - All rights reserved.
     </footer>
+    <script>
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            const stickyClass = 'sticky';
+            const offset = navbar.offsetTop;
+
+            if (window.pageYOffset > offset) {
+                navbar.classList.add(stickyClass);
+            } else {
+                navbar.classList.remove(stickyClass);
+            }
+
+            const footer = document.getElementById('footer');
+            if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
+                footer.classList.add('visible');
+            } else {
+                footer.classList.remove('visible');
+            }
+        });
+    </script>
 </body>
 </html>
