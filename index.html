@@ -13,8 +13,9 @@
         header {
             background-color: #333;
             color: #fff;
-            padding: 20px 0;
+            padding: 10px 20px;
             text-align: center;
+            height: 50px;
         }
         nav {
             background-color: #444;
@@ -42,6 +43,11 @@
             color: #fff;
             text-decoration: none;
             margin: 0 10px;
+            transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition for hover effect */
+        }
+        nav a:hover {
+            background-color: #787878;
+            color: #fff;
         }
         .hero {
             background-image: linear-gradient(to right bottom, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('background.jpg'); /* replace with your image path */
@@ -65,10 +71,11 @@
             padding: 10px 20px;
             text-decoration: none;
             border-radius: 5px;
-            transition: background-color 0.3s ease;
+            transition: background-color 0.3s ease, transform 0.3s ease; /* Smooth transition */
         }
         .btn:hover {
             background-color: #0056b3;
+            transform: translateY(-5px); /* Move slightly upwards */
         }
         .features {
             display: flex;
@@ -83,15 +90,35 @@
             text-align: center;
             padding: 20px;
             margin: 20px;
-            background-color: #fff;
+            background-color: #444;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             border-radius: 10px;
+            transition: transform 0.3s ease; /* Smooth transition */
+            opacity: 0; /* Initially hidden */
+            transform: translateX(100%); /* Start from right */
+        }
+        .feature a {
+            text-decoration: none; /* Remove underline from links */
+            color: inherit; /* Inherit color from parent */
+            cursor: pointer; /* Change cursor on hover */
+            transition: transform 0.3s ease; /* Smooth transition */
+        }
+        .feature:hover {
+            transform: translateY(-5px); /* Move slightly upwards */
         }
         .feature h2 {
-            color: #333;
+            color: #fcefef;
         }
         .feature p {
-            color: #777;
+            color: #fcefef;
+        }
+        .feature.visible {
+            opacity: 1;
+            transform: translateX(0); /* Slide in from right */
+            transition: transform 0.6s ease-out, opacity 0.6s ease-out; /* Smooth transition */
+        }
+        .feature:hover {
+            transform: translateY(-10px); /* Move slightly upwards on hover */
         }
         .team {
             padding: 50px 0;
@@ -133,9 +160,9 @@
     </header>
     <nav id="navbar">
         <div class="left-links">
-            <a href="index.html">Home</a>
-            <a href="about.html">About</a>
-            <a href="services.html">Services</a>
+            <a href="index.html" class="navlink">Home</a>
+            <a href="about.html" class="navlink">About</a>
+            <a href="services.html" class="navlink">Services</a>
         </div>
         <div class="right-link">
             <a href="signup.html" class="signup">Sign Up</a>
@@ -144,55 +171,85 @@
     <div class="hero">
         <h1>Explore the World with Us</h1>
         <p>Find your dream destinations and embark on unforgettable journeys.</p>
-        <a href="#" class="btn">Get Started</a>
+        <a href="signup.html" class="btn">Get Started</a>
     </div>
     <div class="features">
-        <div class="feature">
-            <h2>Book Flights</h2>
-            <p>Find the best deals on flights to your favorite destinations.</p>
+        <div class="feature" id="feature1">
+            <a href="flights.html">
+                <h2>Book Flights</h2>
+                <p>Find the best deals on flights to your favorite destinations.</p>
+            </a>
         </div>
-        <div class="feature">
-            <h2>Discover Hotels</h2>
-            <p>Explore a wide range of accommodation options for your stay.</p>
+        <div class="feature" id="feature2">
+            <a href="hotels.html">
+                <h2>Discover Hotels</h2>
+                <p>Explore a wide range of accommodation options for your stay.</p>
+            </a>
         </div>
-        <div class="feature">
+        <div class="feature
+        " id="feature3">
+        <a href="activities.html">
             <h2>Plan Activities</h2>
             <p>Discover exciting activities and experiences at your destination.</p>
-        </div>
+        </a>
     </div>
-    <div class="team">
-        <h2>Our Team</h2>
-        <div class="team-member">
-            <img src="tayyab.jpg" alt="Team Member 1">
-            <p>Tayyab Siddique<br>Reg# 4424-FBAS/BSCS4/F-21(A)</p>
-        </div>
-        <div class="team-member">
-            <img src="talha.jpg" alt="Team Member 2">
-            <p>Talha Sheikh<br>Reg# 4428-FBAS/BSCS4/F-21(A)</p>
-        </div>
+</div>
+<div class="team">
+    <h2>Our Team</h2>
+    <div class="team-member">
+        <img src="tayyab.jpg" alt="Team Member 1">
+        <p>Tayyab Siddique<br>Reg# 4424-FBAS/BSCS4/F-21(A)</p>
     </div>
-    <footer id="footer">
-        &copy; 2024 TravelWithUs - All rights reserved.
-    </footer>
-    <script>
-        window.addEventListener('scroll', function() {
-            const navbar = document.getElementById('navbar');
-            const stickyClass = 'sticky';
-            const offset = navbar.offsetTop;
+    <div class="team-member">
+        <img src="talha.jpg" alt="Team Member 2">
+        <p>Talha Sheikh<br>Reg# 4428-FBAS/BSCS4/F-21(A)</p>
+    </div>
+</div>
+<footer id="footer">
+    &copy; 2024 TravelWithUs - All rights reserved.
+</footer>
+<script>
+    window.addEventListener('scroll', function() {
+        const navbar = document.getElementById('navbar');
+        const stickyClass = 'sticky';
+        const offset = navbar.offsetTop;
 
-            if (window.pageYOffset > offset) {
-                navbar.classList.add(stickyClass);
-            } else {
-                navbar.classList.remove(stickyClass);
-            }
+        if (window.pageYOffset > offset) {
+            navbar.classList.add(stickyClass);
+        } else {
+            navbar.classList.remove(stickyClass);
+        }
 
-            const footer = document.getElementById('footer');
-            if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
-                footer.classList.add('visible');
-            } else {
-                footer.classList.remove('visible');
+        const footer = document.getElementById('footer');
+        if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
+            footer.classList.add('visible');
+        } else {
+            footer.classList.remove('visible');
+        }
+
+        // Slide in features on scroll
+        const features = document.querySelectorAll('.feature');
+        features.forEach((feature, index) => {
+            const featurePosition = feature.getBoundingClientRect().top;
+            const screenPosition = window.innerHeight;
+
+            if (featurePosition < screenPosition) {
+                feature.classList.add('visible');
             }
         });
-    </script>
+    });
+
+    // Move features slightly upward on hover
+    const featureBoxes = document.querySelectorAll('.feature');
+    featureBoxes.forEach(box => {
+        box.addEventListener('mouseenter', () => {
+            box.style.transform = 'translateY(-5px)';
+        });
+
+        box.addEventListener('mouseleave', () => {
+            box.style.transform = 'translateY(0)';
+        });
+    });
+</script>
 </body>
 </html>
