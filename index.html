@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TravelWithUs - Home</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -23,16 +24,16 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            position: relative; /* Normal position initially */
+            position: relative;
             width: 100%;
-            transition: all 0.3s ease; /* Smooth transition */
+            transition: all 0.3s ease;
         }
         nav.sticky {
             position: fixed;
             top: 0;
-            z-index: 1000; /* Ensure it is above other content */
-            background-color: rgba(68, 68, 68, 0.9); /* Slight transparency for smoother transition */
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional shadow for effect */
+            z-index: 1000;
+            background-color: rgba(68, 68, 68, 0.9);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
         nav .left-links,
         nav .right-link {
@@ -43,14 +44,24 @@
             color: #fff;
             text-decoration: none;
             margin: 0 10px;
-            transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition for hover effect */
+            transition: background-color 0.3s ease, color 0.3s ease;
         }
         nav a:hover {
             background-color: #787878;
             color: #fff;
         }
+        .dropdown-menu {
+            background-color: #444;
+            border: none;
+        }
+        .dropdown-menu a {
+            color: #fff;
+        }
+        .dropdown-menu a:hover {
+            background-color: #555;
+        }
         .hero {
-            background-image: linear-gradient(to right bottom, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('background.jpg'); /* replace with your image path */
+            background-image: linear-gradient(to right bottom, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('background.jpg');
             background-size: cover;
             background-position: center;
             color: #fff;
@@ -71,11 +82,11 @@
             padding: 10px 20px;
             text-decoration: none;
             border-radius: 5px;
-            transition: background-color 0.3s ease, transform 0.3s ease; /* Smooth transition */
+            transition: background-color 0.3s ease, transform 0.3s ease;
         }
         .btn:hover {
             background-color: #0056b3;
-            transform: translateY(-5px); /* Move slightly upwards */
+            transform: translateY(-5px);
         }
         .features {
             display: flex;
@@ -93,18 +104,18 @@
             background-color: #444;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             border-radius: 10px;
-            transition: transform 0.3s ease; /* Smooth transition */
-            opacity: 0; /* Initially hidden */
-            transform: translateX(100%); /* Start from right */
+            transition: transform 0.3s ease;
+            opacity: 0;
+            transform: translateX(100%);
         }
         .feature a {
-            text-decoration: none; /* Remove underline from links */
-            color: inherit; /* Inherit color from parent */
-            cursor: pointer; /* Change cursor on hover */
-            transition: transform 0.3s ease; /* Smooth transition */
+            text-decoration: none;
+            color: inherit;
+            cursor: pointer;
+            transition: transform 0.3s ease;
         }
         .feature:hover {
-            transform: translateY(-5px); /* Move slightly upwards */
+            transform: translateY(-5px);
         }
         .feature h2 {
             color: #fcefef;
@@ -114,11 +125,8 @@
         }
         .feature.visible {
             opacity: 1;
-            transform: translateX(0); /* Slide in from right */
-            transition: transform 0.6s ease-out, opacity 0.6s ease-out; /* Smooth transition */
-        }
-        .feature:hover {
-            transform: translateY(-10px); /* Move slightly upwards on hover */
+            transform: translateX(0);
+            transition: transform 0.6s ease-out, opacity 0.6s ease-out;
         }
         .team {
             padding: 50px 0;
@@ -145,12 +153,12 @@
             padding: 20px 0;
             text-align: center;
             position: fixed;
-            bottom: -100px; /* Hidden by default */
+            bottom: -100px;
             width: 100%;
             transition: bottom 0.3s;
         }
         footer.visible {
-            bottom: 0; /* Show footer */
+            bottom: 0;
         }
     </style>
 </head>
@@ -158,14 +166,39 @@
     <header>
         <h1>Welcome to TravelWithUs</h1>
     </header>
-    <nav id="navbar">
-        <div class="left-links">
-            <a href="index.html" class="navlink">Home</a>
-            <a href="about.html" class="navlink">About</a>
-            <a href="services.html" class="navlink">Services</a>
-        </div>
-        <div class="right-link">
-            <a href="signup.html" class="signup">Sign Up</a>
+    <nav id="navbar" class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">TravelWithUs</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="about.html">About</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Services
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="flight-booking.html">Flight Booking</a>
+                            <a class="dropdown-item" href="hotel-reservation.html">Hotel Reservation</a>
+                            <a class="dropdown-item" href="activity-planning.html">Activity Planning</a>
+                            <a class="dropdown-item" href="travel-insurance.html">Travel Insurance</a>
+                            <a class="dropdown-item" href="car-rental.html">Car Rental</a>
+                        </div>
+                    </li>
+                </ul>
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="signup.html">Sign Up</a>
+                    </li>
+                </ul>
+            </div>
         </div>
     </nav>
     <div class="hero">
@@ -175,81 +208,95 @@
     </div>
     <div class="features">
         <div class="feature" id="feature1">
-            <a href="flights.html">
+            <a href="flight-booking.html">
                 <h2>Book Flights</h2>
                 <p>Find the best deals on flights to your favorite destinations.</p>
             </a>
         </div>
         <div class="feature" id="feature2">
-            <a href="hotels.html">
+            <a href="hotel-reservation.html">
                 <h2>Discover Hotels</h2>
                 <p>Explore a wide range of accommodation options for your stay.</p>
             </a>
         </div>
-        <div class="feature
-        " id="feature3">
-        <a href="activities.html">
-            <h2>Plan Activities</h2>
-            <p>Discover exciting activities and experiences at your destination.</p>
-        </a>
+        <div class="feature" id="feature3">
+            <a href="activity-planning.html">
+                <h2>Plan Activities</h2>
+                <p>Discover exciting activities and experiences at your destination.</p>
+            </a>
+        </div>
     </div>
-</div>
-<div class="team">
-    <h2>Our Team</h2>
-    <div class="team-member">
-        <img src="tayyab.jpg" alt="Team Member 1">
-        <p>Tayyab Siddique<br>Reg# 4424-FBAS/BSCS4/F-21(A)</p>
+    <div class="team">
+        <h2>Our Team</h2>
+        <div class="team-member">
+            <img src="tayyab.jpg" alt="Team Member 1">
+            <p>Tayyab Siddique<br>Reg# 4424-FBAS/BSCS4/F-21(A)</p>
+        </div>
+        <div class="team-member">
+            <img src="talha.jpg" alt="Team Member 2">
+            <p>Talha Sheikh<br>Reg# 4428-FBAS/BSCS4/F-21(A)</p>
+        </div>
     </div>
-    <div class="team-member">
-        <img src="talha.jpg" alt="Team Member 2">
-        <p>Talha Sheikh<br>Reg# 4428-FBAS/BSCS4/F-21(A)</p>
-    </div>
-</div>
-<footer id="footer">
-    &copy; 2024 TravelWithUs - All rights reserved.
-</footer>
-<script>
-    window.addEventListener('scroll', function() {
-        const navbar = document.getElementById('navbar');
-        const stickyClass = 'sticky';
-        const offset = navbar.offsetTop;
+    <footer id="footer">
+        &copy; 2024 TravelWithUs - All rights reserved.
+    </footer>
+    <script>
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            const stickyClass = 'sticky';
+            const offset = navbar.offsetTop;
 
-        if (window.pageYOffset > offset) {
-            navbar.classList.add(stickyClass);
-        } else {
-            navbar.classList.remove(stickyClass);
-        }
-
-        const footer = document.getElementById('footer');
-        if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
-            footer.classList.add('visible');
-        } else {
-            footer.classList.remove('visible');
-        }
-
-        // Slide in features on scroll
-        const features = document.querySelectorAll('.feature');
-        features.forEach((feature, index) => {
-            const featurePosition = feature.getBoundingClientRect().top;
-            const screenPosition = window.innerHeight;
-
-            if (featurePosition < screenPosition) {
-                feature.classList.add('visible');
+            if (window.pageYOffset > offset) {
+                navbar.classList.add(stickyClass);
+            } else {
+                navbar.classList.remove(stickyClass);
             }
-        });
-    });
 
-    // Move features slightly upward on hover
-    const featureBoxes = document.querySelectorAll('.feature');
-    featureBoxes.forEach(box => {
-        box.addEventListener('mouseenter', () => {
-            box.style.transform = 'translateY(-5px)';
+            const footer = document.getElementById('footer');
+            if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
+                footer.classList.add('visible');
+            } else {
+                footer.classList.remove('visible');
+            }
+
+            // Slide in features on scroll
+            const features = document.querySelectorAll('.feature');
+            features.forEach((feature, index) => {
+                const featurePosition = feature.getBoundingClientRect().top;
+                const screenPosition = window.innerHeight;
+
+                if (featurePosition < screenPosition) {
+                    feature.classList.add('visible');
+                }
+            });
         });
 
-        box.addEventListener('mouseleave', () => {
-            box.style.transform = 'translateY(0)';
+        // Move features slightly upward on hover
+        const featureBoxes = document.querySelectorAll('.feature');
+        featureBoxes.forEach(box => {
+            box.addEventListener('mouseenter', () => {
+                box.style.transform = 'translateY(-5px)';
+            });
+
+            box.addEventListener('mouseleave', () => {
+                box.style.transform = 'translateY(0)';
+            });
         });
-    });
-</script>
+
+        // Enable hover dropdown
+        document.querySelectorAll('.nav-item.dropdown').forEach(function (dropdown) {
+            dropdown.addEventListener('mouseenter', function () {
+                const dropdownMenu = this.querySelector('.dropdown-menu');
+                dropdownMenu.classList.add('show');
+            });
+            dropdown.addEventListener('mouseleave', function () {
+                const dropdownMenu = this.querySelector('.dropdown-menu');
+                dropdownMenu.classList.remove('show');
+            });
+        });
+    </script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
