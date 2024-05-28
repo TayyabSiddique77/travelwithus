@@ -179,3 +179,68 @@ footer {
 .login-form a:hover {
     text-decoration: underline;
 }
+/* Add these styles for the OTP modal */
+#otpModal {
+    display: none;
+    position: fixed;
+    z-index: 1050;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+#otpModal .modal-content {
+    background: linear-gradient(135deg, #d3d3d3, #a9a9a9);
+    margin: 10% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 90%;
+    max-width: 600px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+#otpModal .modal-content .otp-form {
+    width: 100%;
+    padding: 20px;
+}
+#otpModal .modal-content .otp-form h2 {
+    font-size: 1.8em;
+    margin-bottom: 20px;
+}
+#otpModal .modal-content .otp-form input[type="text"],
+#otpModal .modal-content .otp-form input[type="submit"] {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+#otpModal .modal-content .otp-form input[type="submit"] {
+    background-color: #616060;
+    color: #fff;
+    border: none;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+#otpModal .modal-content .otp-form input[type="submit"]:hover {
+    background-color: #3b3636;
+}
+#otpModal .modal-content .otp-form .close {
+    color: #fff; /* White color by default */
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    transition: color 0.3s ease; /* Smooth transition for color change */
+}
+#otpModal .modal-content .otp-form .close:hover,
+#otpModal .modal-content .otp-form .close:focus {
+    color: black; /* Black color on hover */
+    text-decoration: none;
+    cursor: pointer;
+}
