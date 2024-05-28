@@ -188,6 +188,7 @@
             text-decoration: underline;
         }
     </style>
+    <script src="https://smtpjs.com/v3/smtp.js"></script>
 </head>
 <body>
     <header>
@@ -279,15 +280,27 @@
             // Generate random OTP
             const otp = Math.floor(1000 + Math.random() * 9000);
 
-            // Display OTP to the user
-            alert('OTP sent to your email: ' + otp);
+            // Send OTP via email using SMTP.js
+            Email.send({
+                SecureToken: "833ac428-d96c-417c-b3fa-ad8a9ed82f31",  // Replace with your SMTP.js secure token
+                To: email,
+                From: "sheikhtalha2299@gmail.com",  // Replace with your email address
+                Subject: "Your OTP for TravelWithUs",
+                Body: "Your OTP for signing up at TravelWithUs is: " + otp
+            }).then(
+                message => {
+                    if (message === "OK") {
+                        // Store OTP in sessionStorage
+                        sessionStorage.setItem('otp', otp);
 
-            // Store OTP in sessionStorage
-            sessionStorage.setItem('otp', otp);
-
-            // Hide signup form and show OTP form
-            document.getElementById('signup-form').style.display = 'none';
-            document.getElementById('otp-form').style.display = 'block';
+                        // Hide signup form and show OTP form
+                        document.getElementById('signup-form').style.display = 'none';
+                        document.getElementById('otp-form').style.display = 'block';
+                    } else {
+                        alert('Failed to send OTP. Please try again.');
+                    }
+                }
+            );
         });
 
         document.getElementById('otpForm').addEventListener('submit', function(event) {
