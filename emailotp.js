@@ -5,8 +5,8 @@ function sendOTP() {
 	let otp_val = Math.floor(Math.random() * 10000);
 
 	let emailbody = `<h2>Your OTP is </h2>${otp_val}`;
-	Email.send({
-    SecureToken : "68b3e389-084c-476b-a419-338ca2b50f4b",
+	email.send({
+    SecureToken : "833ac428-d96c-417c-b3fa-ad8a9ed82f31",
     To : email.value,
     From : "muhammad.bscs4428@iiu.edu.pk",
     Subject : "Email OTP using JavaScript",
