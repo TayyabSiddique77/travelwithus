@@ -6,6 +6,94 @@
     <title>TravelWithUs - Sign Up</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/signup.css">
+    <style>
+        /* Additional styles for the modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1050;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+        .modal-content {
+            background: #fff;
+            margin: 10% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 600px;
+            text-align: center;
+        }
+        .modal-content .otp-form input,
+        .modal-content .otp-form button {
+            width: 80%;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        .modal-content .otp-form button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+        .modal-content .otp-form button:hover {
+            background-color: #0056b3;
+        }
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        /* Styles for the login modal */
+        .login-image {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .login-image img {
+            max-width: 100%;
+            height: auto;
+        }
+        .login-form {
+            text-align: center;
+        }
+        .login-form input[type="email"],
+        .login-form input[type="password"] {
+            width: 80%;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        .login-form input[type="submit"] {
+            width: 80%;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: none;
+            background-color: #007bff;
+            color: #fff;
+            cursor: pointer;
+        }
+        .login-form input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+        .login-form p {
+            margin-top: 10px;
+        }
+    </style>
     <script src="https://smtpjs.com/v3/smtp.js"></script>
 </head>
 <body>
@@ -56,7 +144,7 @@
             <input type="text" name="name" id="name" placeholder="Full Name" required><br>
             <input type="email" name="email" id="email" placeholder="Email Address" required><br>
             <input type="password" name="password" id="password" placeholder="Password" required><br>
-            <button type="button" onclick="openOtpModal()" class="btn">Send OTP</button>
+            <button type="button" onclick="sendOTP()" class="btn btn-primary">Send OTP</button>
         </form>
         <p>Already have an account? <a href="#" id="loginLinkInline">Log In</a></p>
     </div>
@@ -66,10 +154,8 @@
             <span class="close" id="closeOtpModal">&times;</span>
             <div class="otp-form">
                 <h2>Verify OTP</h2>
-                <form id="otpForm">
-                    <input type="text" name="otp" id="otp" placeholder="Enter OTP" required><br>
-                    <input type="submit" value="Verify OTP">
-                </form>
+                <input type="text" id="otp_inp" placeholder="Enter OTP" required><br>
+                <button type="button" id="otp-btn" class="btn btn-primary">Verify OTP</button>
             </div>
         </div>
     </div>
@@ -96,16 +182,15 @@
     </footer>
 
     <script>
-
-        // Get the modal
+        // Get the modals
         const loginModal = document.getElementById('loginModal');
         const otpModal = document.getElementById('otpModal');
 
-        // Get the button that opens the login modal
+        // Get the buttons that open the modals
         const loginLink = document.getElementById('loginLink');
         const loginLinkInline = document.getElementById('loginLinkInline');
 
-        // Get the <span> element that closes the modals
+        // Get the <span> elements that close the modals
         const closeModal = document.getElementById('closeModal');
         const closeOtpModal = document.getElementById('closeOtpModal');
 
@@ -136,53 +221,48 @@
             }
         }
 
-        // Function to open OTP modal
-        function openOtpModal() {
-            otpModal.style.display = 'flex';
+        // Function to send OTP
+        function sendOTP() {
+            const email = document.getElementById('email').value;
+            const otpModal = document.getElementById('otpModal');
+
+            let otp_val = Math.floor(1000 + Math.random() * 9000); // Generate a 4-digit OTP
+
+            let emailbody = `<h2>Your OTP is </h2>${otp_val}`;
+            window.Email.send({
+                SecureToken: "055eb5f0-bd85-4858-bc4b-4aca29fa9c22",
+                To: email,
+                From: "muhammad.bscs4428@iiu.edu.pk",
+                Subject: "Email OTP for registering TravelWithUs",
+                Body: emailbody,
+            }).then(
+                message => {
+                    if (message === "OK") {
+                        alert("OTP sent to your email " + email);
+
+                        otpModal.style.display = "flex"; // Open OTP modal
+
+                        const otp_inp = document.getElementById('otp_inp');
+                        const otp_btn = document.getElementById('otp-btn');
+
+                        otp_btn.addEventListener('click', () => {
+                            if (otp_inp.value == otp_val) {
+                                alert("Email address verified...");
+                                otpModal.style.display = "none"; // Close OTP modal on success
+                            } else {
+                                alert("Invalid OTP");
+                            }
+                        });
+                    } else {
+                        alert("Failed to send OTP. Please try again.");
+                    }
+                }
+            ).catch(error => {
+                console.error('Error:', error);
+                alert("An error occurred. Please try again later.");
+            });
         }
-
-        document.getElementById('loginForm').addEventListener('submit', function(event) {
-            event.preventDefault();
-
-            // Add your login logic here
-            alert('Login form submitted');
-
-            // Reset the form and hide the modal for demonstration purposes
-            document.getElementById('loginForm').reset();
-            loginModal.style.display = 'none';
-        });
-
-        document.getElementById('otpForm').addEventListener('submit', function(event) {
-            event.preventDefault();
-
-            // Add your OTP verification logic here
-            alert('OTP form submitted');
-
-            // Reset the form and hide the modal for demonstration purposes
-            document.getElementById('otpForm').reset();
-            otpModal.style.display = 'none';
-        });
-
-        window.addEventListener('scroll', function() {
-            const navbar = document.getElementById('navbar');
-            const stickyClass = 'sticky';
-            const offset = navbar.offsetTop;
-
-            if (window.pageYOffset > offset) {
-                navbar.classList.add(stickyClass);
-            } else {
-                navbar.classList.remove(stickyClass);
-            }
-
-            const footer = document.getElementById('footer');
-            if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
-                footer.classList.add('visible');
-            } else {
-                footer.classList.remove('visible');
-            }
-        });
     </script>
-    <script src="./emailotp.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>

@@ -112,18 +112,48 @@ nav a:hover {
     justify-content: space-between;
     align-items: center;
 }
-.modal-content .login-image {
-    width: 50%;
-}
-.modal-content .login-form {
-    width: 50%;
+.modal-content .otp-form {
+    width: 100%;
     padding: 20px;
 }
-.modal-content img {
-    width: 100%;
-    height: auto;
-    border-radius: 10px;
+.modal-content .otp-form h2 {
+    font-size: 1.8em;
+    margin-bottom: 20px;
 }
+.modal-content .otp-form input[type="text"],
+.modal-content .otp-form input[type="submit"] {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+.modal-content .otp-form input[type="submit"] {
+    background-color: #616060;
+    color: #fff;
+    border: none;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+.modal-content .otp-form input[type="submit"]:hover {
+    background-color: #3b3636;
+}
+.modal-content .otp-form .close {
+    color: #fff; /* White color by default */
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    transition: color 0.3s ease; /* Smooth transition for color change */
+}
+.modal-content .otp-form .close:hover,
+.modal-content .otp-form .close:focus {
+    color: black; /* Black color on hover */
+    text-decoration: none;
+    cursor: pointer;
+}
+
 .close {
     color: #fff; /* White color by default */
     float: right;
