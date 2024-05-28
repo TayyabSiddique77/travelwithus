@@ -8,6 +8,7 @@
     <style>
         body {
             font-family: Arial, sans-serif;
+            background-color: #b8b4b4;
         }
         header, footer {
             background-color: #333;
@@ -27,6 +28,39 @@
         }
         .dropdown-menu a:hover {
             background-color: #555;
+        }
+        .gallery {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .gallery-item {
+            flex: 1 1 calc(33.333% - 20px);
+            padding: 10px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            border: none;
+            border-radius: 10px;
+        }
+        .gallery-item img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
+        .gallery-item p {
+            display: none;
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            padding: 5px;
+            border-radius: 5px;
+        }
+        .gallery-item:hover p {
+            display: block;
         }
     </style>
 </head>
@@ -65,7 +99,91 @@
     <div class="container">
         <h2>Find and Book Hotels</h2>
         <p>Explore a wide range of accommodation options for your stay.</p>
-        <!-- Add your content here -->
+        <!-- Hotel Booking Form -->
+        <div class="booking-form">
+            <form action="#" method="post">
+                <h2 class="sub-heading">Booking Details</h2>
+                <div class="form-group">
+                    <label for="location">Location</label>
+                    <select class="form-control" id="location" required>
+                        <option value="">Select Location</option>
+                        <option value="new-york">New York</option>
+                        <option value="paris">Paris</option>
+                        <option value="tokyo">Tokyo</option>
+                        <option value="london">London</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="hotel">Hotel</label>
+                    <select class="form-control" id="hotel" required>
+                        <option value="">Select Hotel</option>
+                        <option value="hotel-a">Hotel A</option>
+                        <option value="hotel-b">Hotel B</option>
+                        <option value="hotel-c">Hotel C</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="checkin">Check-in Date</label>
+                    <input type="date" class="form-control" id="checkin" required>
+                </div>
+                <div class="form-group">
+                    <label for="checkout">Check-out Date</label>
+                    <input type="date" class="form-control" id="checkout" required>
+                </div>
+                <div class="form-group">
+                    <label for="guests">Number of Guests</label>
+                    <select class="form-control" id="guests" required>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                    </select>
+                </div>
+                <h3 class="sub-heading">Personal Details</h3>
+                <div class="form-group">
+                    <label for="fullname">Full Name</label>
+                    <input type="text" class="form-control" id="fullname" placeholder="Enter your full name" required>
+                </div>
+                <div class="form-group">
+                    <label for="phone">Phone Number</label>
+                    <input type="tel" class="form-control" id="phone" placeholder="Enter your phone number" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" class="form-control" id="email" placeholder="Enter your email" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="reset" class="btn btn-secondary">Clear Form</button>
+            </form>
+        </div>
+        <!-- Gallery Section -->
+        <div class="gallery">
+            <div class="gallery-item">
+                <img src="hotel1.jpg" alt="Hotel 1">
+                <p>Hotel 1 Description</p>
+            </div>
+            <div class="gallery-item">
+                <img src="hotel2.jpg" alt="Hotel 2">
+                <p>Hotel 2 Description</p>
+            </div>
+            <div class="gallery-item">
+                <img src="hotel3.jpg" alt="Hotel 3">
+                <p>Hotel 3 Description</p>
+            </div>
+            <div class="gallery-item">
+                <img src="hotel4.jpg" alt="Hotel 4">
+                <p>Hotel 4 Description</p>
+            </div>
+            <div class="gallery-item">
+                <img src="hotel5.jpg" alt="Hotel 5">
+                <p>Hotel 5 Description</p>
+            </div>
+            <div class="gallery-item">
+                <img src="hotel6.jpg" alt="Hotel 6">
+                <p>Hotel 6 Description</p>
+            </div>
+        </div>
     </div>
     <footer>
         &copy; 2024 TravelWithUs - All rights reserved.
