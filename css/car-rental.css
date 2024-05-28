@@ -1,0 +1,23 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #b8b4b4;
+}
+header, footer {
+    background-color: #333;
+    color: #fff;
+    padding: 10px 20px;
+    text-align: center;
+}
+.container {
+    padding: 50px 0;
+}
+.dropdown-menu{
+    background-color: #2f2f2f;
+}
+.dropdown-item{
+    color:white;
+}
+.dropdown-item:hover{
+    background-color:#605e5e ;
+    color:black;
+}
