@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TravelWithUs - Sign Up</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -13,8 +14,9 @@
         header {
             background-color: #333;
             color: #fff;
-            padding: 20px 0;
+            padding: 10px 20px;
             text-align: center;
+            height: 50px;
         }
         nav {
             background-color: #444;
@@ -22,6 +24,16 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            position: relative;
+            width: 100%;
+            transition: all 0.3s ease;
+        }
+        nav.sticky {
+            position: fixed;
+            top: 0;
+            z-index: 1000;
+            background-color: rgba(68, 68, 68, 0.9);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
         nav .left-links,
         nav .right-link {
@@ -32,27 +44,39 @@
             color: #fff;
             text-decoration: none;
             margin: 0 10px;
+            transition: background-color 0.3s ease, color 0.3s ease;
         }
-        .signup-form,
-        .otp-form {
+        nav a:hover {
+            background-color: #787878;
+            color: #fff;
+        }
+        .dropdown-menu {
+            background-color: #444;
+            border: none;
+        }
+        .dropdown-menu a {
+            color: #fff;
+        }
+        .dropdown-menu a:hover {
+            background-color: #555;
+        }
+        .form-container {
             padding: 50px;
             text-align: center;
+            background-color: #f9f9f9;
         }
-        .signup-form h1,
-        .otp-form h1 {
+        .form-container h1 {
             font-size: 2.5em;
             margin-bottom: 20px;
         }
-        .signup-form p,
-        .otp-form p {
+        .form-container p {
             font-size: 1.2em;
             color: #666;
             line-height: 1.6;
         }
-        .signup-form input[type="text"],
-        .signup-form input[type="email"],
-        .signup-form input[type="password"],
-        .otp-form input[type="text"] {
+        .form-container input[type="text"],
+        .form-container input[type="email"],
+        .form-container input[type="password"] {
             width: 100%;
             padding: 10px;
             margin: 10px 0;
@@ -60,8 +84,7 @@
             border: 1px solid #ccc;
             box-sizing: border-box;
         }
-        .signup-form input[type="submit"],
-        .otp-form input[type="submit"] {
+        .form-container input[type="submit"] {
             background-color: #007bff;
             color: #fff;
             border: none;
@@ -71,9 +94,56 @@
             cursor: pointer;
             transition: background-color 0.3s ease;
         }
-        .signup-form input[type="submit"]:hover,
-        .otp-form input[type="submit"]:hover {
+        .form-container input[type="submit"]:hover {
             background-color: #0056b3;
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1050;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+        .modal-content {
+            background: linear-gradient(135deg, #d3d3d3, #a9a9a9);
+            margin: 10% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 90%;
+            max-width: 600px;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .modal-content .login-image {
+            width: 50%;
+        }
+        .modal-content .login-form {
+            width: 50%;
+            padding: 20px;
+        }
+        .modal-content img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
+        .close {
+            color: #fff; /* White color by default */
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            transition: color 0.3s ease; /* Smooth transition for color change */
+        }
+        .close:hover,
+        .close:focus {
+            color: black; /* Black color on hover */
+            text-decoration: none;
+            cursor: pointer;
         }
         footer {
             background-color: #333;
@@ -84,6 +154,39 @@
             bottom: 0;
             width: 100%;
         }
+        .login-form h2 {
+            font-size: 1.8em;
+            margin-bottom: 20px;
+        }
+        .login-form input[type="email"],
+        .login-form input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+        }
+        .login-form input[type="submit"] {
+            background-color: #616060;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            font-size: 1em;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .login-form input[type="submit"]:hover {
+            background-color: #3b3636;
+        }
+        .login-form a {
+            color: #007bff;
+            text-decoration: none;
+        }
+        .login-form a:hover {
+            text-decoration: underline;
+        }
     </style>
     <script src="https://smtpjs.com/v3/smtp.js"></script>
 </head>
@@ -91,17 +194,45 @@
     <header>
         <h1>Sign Up for TravelWithUs</h1>
     </header>
-    <nav>
-        <div class="left-links">
-            <a href="index.html">Home</a>
-            <a href="about.html">About</a>
-            <a href="services.html">Services</a>
-        </div>
-        <div class="right-link">
-            <a href="signup.html" class="signup">Sign Up</a>
+    <nav id="navbar" class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">TravelWithUs</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="about.html">About</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Services
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="flight-booking.html">Flight Booking</a>
+                            <a class="dropdown-item" href="hotel-reservation.html">Hotel Reservation</a>
+                            <a class="dropdown-item" href="activity-planning.html">Activity Planning</a>
+                            <a class="dropdown-item" href="travel-insurance.html">Travel Insurance</a>
+                            <a class="dropdown-item" href="car-rental.html">Car Rental</a>
+                        </div>
+                    </li>
+                </ul>
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="signup.html">Sign Up</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" id="loginLink">Log In</a>
+                    </li>
+                </ul>
+            </div>
         </div>
     </nav>
-    <div class="signup-form" id="signup-form">
+    <div class="form-container" id="signup-form">
         <h1>Create an Account</h1>
         <form id="signupForm">
             <input type="text" name="name" id="name" placeholder="Full Name" required><br>
@@ -109,7 +240,7 @@
             <input type="password" name="password" id="password" placeholder="Password" required><br>
             <input type="submit" value="Send OTP">
         </form>
-        <p>Already have an account? <a href="#">Log In</a></p>
+        <p>Already have an account? <a href="#" id="loginLinkInline">Log In</a></p>
     </div>
     <div class="otp-form" id="otp-form" style="display: none;">
         <h1>Verify OTP</h1>
@@ -118,7 +249,24 @@
             <input type="submit" value="Verify OTP">
         </form>
     </div>
-    <footer>
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <div class="login-image">
+                <img src="images/login.jpg" alt="Login Image">
+            </div>
+            <div class="login-form">
+                <span class="close" id="closeModal">&times;</span>
+                <h2>Login to your account</h2>
+                <form id="loginForm">
+                    <input type="email" name="loginEmail" id="loginEmail" placeholder="Email Address" required><br>
+                    <input type="password" name="loginPassword" id="loginPassword" placeholder="Password" required><br>
+                    <input type="submit" value="Log In">
+                </form>
+                <p><a href="#">Forgot Password?</a> | <a href="#">Resend Activation Email?</a> | <a href="#">Help?</a></p>
+            </div>
+        </div>
+    </div>
+    <footer id="footer">
         &copy; 2024 TravelWithUs - All rights reserved.
     </footer>
 
@@ -128,26 +276,31 @@
 
             // Get user input
             const email = document.getElementById('email').value;
-            const otp = Math.floor(1000 + Math.random() * 9000);  // Generate OTP
 
-            // Send OTP via SMTP.js
+            // Generate random OTP
+            const otp = Math.floor(1000 + Math.random() * 9000);
+
+            // Send OTP via email using SMTP.js
             Email.send({
                 SecureToken: "833ac428-d96c-417c-b3fa-ad8a9ed82f31",  // Replace with your SMTP.js secure token
                 To: email,
                 From: "sheikhtalha2299@gmail.com",  // Replace with your email address
                 Subject: "Your OTP for TravelWithUs",
                 Body: "Your OTP for signing up at TravelWithUs is: " + otp
-            }).then(function(message) {
-                if (message === "OK") {
-                    // Store OTP in sessionStorage
-                    sessionStorage.setItem('otp', otp);
-                    // Hide signup form and show OTP form
-                    document.getElementById('signup-form').style.display = 'none';
-                    document.getElementById('otp-form').style.display = 'block';
-                } else {
-                    alert('Failed to send OTP. Please try again.');
+            }).then(
+                message => {
+                    if (message === "OK") {
+                        // Store OTP in sessionStorage
+                        sessionStorage.setItem('otp', otp);
+
+                        // Hide signup form and show OTP form
+                        document.getElementById('signup-form').style.display = 'none';
+                        document.getElementById('otp-form').style.display = 'block';
+                    } else {
+                        alert('Failed to send OTP. Please try again.');
+                    }
                 }
-            });
+            );
         });
 
         document.getElementById('otpForm').addEventListener('submit', function(event) {
@@ -155,12 +308,14 @@
 
             // Get user input OTP
             const enteredOtp = document.getElementById('otp').value;
-            const storedOtp = sessionStorage.getItem('otp');  // Retrieve stored OTP
+
+            // Retrieve stored OTP from sessionStorage
+            const storedOtp = sessionStorage.getItem('otp');
 
             // Verify OTP
             if (enteredOtp === storedOtp) {
                 alert('Sign up successful!');
-                // Reset forms and states
+                // Reset forms and states for demonstration purposes
                 document.getElementById('signupForm').reset();
                 document.getElementById('otpForm').reset();
                 document.getElementById('signup-form').style.display = 'block';
@@ -170,6 +325,69 @@
                 alert('Invalid OTP. Please try again.');
             }
         });
+
+        // Get the modal
+        const modal = document.getElementById('loginModal');
+
+        // Get the button that opens the modal
+        const loginLink = document.getElementById('loginLink');
+        const loginLinkInline = document.getElementById('loginLinkInline');
+
+        // Get the <span> element that closes the modal
+        const closeModal = document.getElementById('closeModal');
+
+        // When the user clicks the button, open the modal
+        loginLink.onclick = function() {
+            modal.style.display = 'flex';
+        }
+        loginLinkInline.onclick = function() {
+            modal.style.display = 'flex';
+        }
+
+        // When the user clicks on <span> (x), close the modal
+        closeModal.onclick = function() {
+            modal.style.display = 'none';
+        }
+
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function(event) {
+            if (event.target === modal) {
+                modal.style.display = 'none';
+            }
+        }
+
+        document.getElementById('loginForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            // Add your login logic here
+            alert('Login form submitted');
+
+            // Reset the form and hide the modal for demonstration purposes
+            document.getElementById('loginForm').reset();
+            modal.style.display = 'none';
+        });
+
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            const stickyClass = 'sticky';
+            const offset = navbar.offsetTop;
+
+            if (window.pageYOffset > offset) {
+                navbar.classList.add(stickyClass);
+            } else {
+                navbar.classList.remove(stickyClass);
+            }
+
+            const footer = document.getElementById('footer');
+            if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
+                footer.classList.add('visible');
+            } else {
+                footer.classList.remove('visible');
+            }
+        });
     </script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
