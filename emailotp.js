@@ -5,11 +5,11 @@ function sendOTP() {
 	let otp_val = Math.floor(Math.random() * 10000);
 
 	let emailbody = `<h2>Your OTP is </h2>${otp_val}`;
-	Email.send({
-    SecureToken : "833ac428-d96c-417c-b3fa-ad8a9ed82f31",
+	window.Email.send({
+    SecureToken : "055eb5f0-bd85-4858-bc4b-4aca29fa9c22",
     To : email.value,
-    From : "sheikhtalha2299@gmail.com",
-    Subject : "Email OTP using JavaScript",
+    From : "muhammad.bscs4428@iiu.edu.pk",
+    Subject : "Email OTP for registering TravelWithUs",
     Body : emailbody,
 }).then(
 

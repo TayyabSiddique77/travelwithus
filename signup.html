@@ -64,7 +64,7 @@
         <h1>Verify OTP</h1>
         <form id="otpForm">
             <input type="text" name="otp" id="otp" placeholder="Enter OTP" required><br>
-            <input type="submit" value="Verify OTP">
+            <button onclick="sendOTP()" class="btn">Send OTP</button>
         </form>
     </div>
     <div id="loginModal" class="modal">
@@ -89,60 +89,6 @@
     </footer>
 
     <script>
-        document.getElementById('signupForm').addEventListener('submit', function(event) {
-            event.preventDefault();
-
-            // Get user input
-            const email = document.getElementById('email').value;
-
-            // Generate random OTP
-            const otp = Math.floor(1000 + Math.random() * 9000);
-
-            // Send OTP via email using SMTP.js
-            Email.send({
-                SecureToken: "833ac428-d96c-417c-b3fa-ad8a9ed82f31",  // Replace with your SMTP.js secure token
-                To: email,
-                From: "sheikhtalha2299@gmail.com",  // Replace with your email address
-                Subject: "Your OTP for TravelWithUs",
-                Body: "Your OTP for signing up at TravelWithUs is: " + otp
-            }).then(
-                message => {
-                    if (message === "OK") {
-                        // Store OTP in sessionStorage
-                        sessionStorage.setItem('otp', otp);
-
-                        // Hide signup form and show OTP form
-                        document.getElementById('signup-form').style.display = 'none';
-                        document.getElementById('otp-form').style.display = 'block';
-                    } else {
-                        alert('Failed to send OTP. Please try again.');
-                    }
-                }
-            );
-        });
-
-        document.getElementById('otpForm').addEventListener('submit', function(event) {
-            event.preventDefault();
-
-            // Get user input OTP
-            const enteredOtp = document.getElementById('otp').value;
-
-            // Retrieve stored OTP from sessionStorage
-            const storedOtp = sessionStorage.getItem('otp');
-
-            // Verify OTP
-            if (enteredOtp === storedOtp) {
-                alert('Sign up successful!');
-                // Reset forms and states for demonstration purposes
-                document.getElementById('signupForm').reset();
-                document.getElementById('otpForm').reset();
-                document.getElementById('signup-form').style.display = 'block';
-                document.getElementById('otp-form').style.display = 'none';
-                sessionStorage.removeItem('otp');
-            } else {
-                alert('Invalid OTP. Please try again.');
-            }
-        });
 
         // Get the modal
         const modal = document.getElementById('loginModal');
@@ -204,6 +150,7 @@
             }
         });
     </script>
+    <script src="./emailotp.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
