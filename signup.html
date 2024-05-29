@@ -249,6 +249,8 @@
                             if (otp_inp.value == otp_val) {
                                 alert("Email address verified...");
                                 otpModal.style.display = "none"; // Close OTP modal on success
+                                document.getElementById('signupForm').reset(); // Clear signup form
+                                otp_inp.value = ''; // Clear OTP input field
                             } else {
                                 alert("Invalid OTP");
                             }
